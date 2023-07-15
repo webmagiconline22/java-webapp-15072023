@@ -11,7 +11,7 @@ pipeline {
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'my-java-webapp/target/*.war', fingerprint: true
+                archiveArtifacts artifacts: '$WORKSPACE/target/*.war', fingerprint: true
             }
         }
     }
