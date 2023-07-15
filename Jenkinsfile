@@ -8,11 +8,5 @@ pipeline {
                 sh "mvn clean install package"
             }
         }
-
-        stage('Archive') {
-            steps {
-                archiveArtifacts artifacts: '$WORKSPACE/target/*.war', fingerprint: true
-            }
-        }
     }
 }
