@@ -2,29 +2,36 @@ pipeline {
     agent any
 
     stages {
-
+// Junit testing the code
         stage('Test') {
             steps {
                 sh "mvn test"
             }
         }
-
+// Sending to SonarCloud for static code analysis
         stage('Static Code Analysis') {
             steps {
                 sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=webmagiconline1_java-webapp-15072023"
             }
         }
-            
+// Building the java application 
         stage('Build') {
             steps {
                 sh "mvn clean install package"
             }
         }
-
-        stage('Deploy') {
+// Publishing the artifact to Nexus or any artifact repository
+        stage('Publish') {
             steps {
                 sh "mvn deploy"
             }
         }
+// Deploying the application to Tomcat Server
+        stage('Deploy') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'tomcat-manager-credentials', usernameVariable: 'TOMCAT_USERNAME', passwordVariable: 'TOMCAT_PASSWORD')]) {
+                    sh "mvn tomcat7:redeploy -Dtomcat.username=${TOMCAT_USERNAME} -Dtomcat.password=${TOMCAT_PASSWORD} -Dtomcat.url=http://<hostname>:<port>/manager/text -Dmaven.tomcat.path=/my-java-webapp"
+                }
+            }
     }
 }
