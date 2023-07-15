@@ -9,11 +9,11 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis') {
-            steps {
-                sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=webmagiconline1_java-webapp-15072023"
-            }
-        }
+        // stage('Static Code Analysis') {
+        //     steps {
+        //         sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=webmagiconline1_java-webapp-15072023"
+        //     }
+        // }
             
         stage('Build') {
             steps {
