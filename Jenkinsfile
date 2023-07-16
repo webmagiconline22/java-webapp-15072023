@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        // Set the PATH variable to include the location of Maven executable
+        PATH = "/opt/maven/bin:${env.PATH}"
+    }
     stages {
 // Junit testing the code
         stage('Test') {
