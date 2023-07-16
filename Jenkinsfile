@@ -30,5 +30,11 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to ACI') {
+            steps {
+                sh 'az login --service-principal -u <service_principal_id> -p "<service_principal_secret>" --tenant <azure_tenant_id>'
+                sh 'az container create --resource-group ${RG_NON_PROD} --file aci.yaml'
+            }
+        }
   }
 }
