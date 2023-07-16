@@ -5,7 +5,7 @@ FROM tomcat:latest
 WORKDIR /usr/local/tomcat/webapps/
 
 # Copy the .war file from the local machine to the container's working directory
-COPY /var/lib/jenkins/workspace/java-web/my-java-webapp.war .
+COPY ${PWD}/target/my-java-webapp.war .
 
 # Expose the port that Tomcat is listening on (usually 8080 by default)
 EXPOSE 8080
