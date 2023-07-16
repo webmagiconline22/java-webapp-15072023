@@ -1,0 +1,19 @@
+apiVersion: '2018-10-01'
+location: centralindia
+name: my-aci-deployment
+properties:
+  containers:
+  - name: my-java-webapp-container
+    properties:
+      image: dab8106/javaweb:16072023
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: 8080  # Change to the port your Java application listens on
+tags: {}
