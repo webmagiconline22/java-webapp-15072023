@@ -1,14 +1,12 @@
-# Use a base image with Java and Tomcat (you can choose a different base image if needed)
+# Stage 1: Build the Java application using Maven
+FROM maven:latest AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn package
+
+# Stage 2: Create the final Tomcat image and deploy the Java application
 FROM tomcat:latest
-
-# Set the working directory inside the container
-WORKDIR /usr/local/tomcat/webapps/
-
-# Copy the .war file from the local machine to the container's working directory
-COPY ${PWD}/target/my-java-webapp.war .
-
-# Expose the port that Tomcat is listening on (usually 8080 by default)
+COPY --from=build /app/target/my-java-webapp.war /usr/local/tomcat/webapps/
 EXPOSE 8080
-
-# Start Tomcat when the container runs
 CMD ["catalina.sh", "run"]
