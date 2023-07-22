@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     // Get the current Git branch name
-                    def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    def branchName = env.BRANCH_NAME
 
                     // Construct the Docker image name based on the branch name
                     def dockerImageName = "dab8106/${branchName}-javaweb:latest"
