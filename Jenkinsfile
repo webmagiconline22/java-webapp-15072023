@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    parameters {
+        // Add parameters for Docker Hub credentials
+        string(name: 'DOCKERHUB_CREDENTIALS', defaultValue: '', description: 'Docker Hub credentials ID')
+    }
+    
     stages {
 // Build & Push Docker Image
         stage('Build & Publish') {
