@@ -21,6 +21,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '/home/vsts/work/1/s/target/*.war'
+    PathtoPublish: '/home/vsts/work/1/s/target/my-java-webapp.war'
     ArtifactName: 'drop'
     publishLocation: 'Container'
