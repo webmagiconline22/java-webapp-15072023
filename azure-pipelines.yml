@@ -19,6 +19,7 @@ steps:
     cliProjectKey: 'ddc9728c13474fc32447f109e8af6df03e2c8cd2'
     cliProjectName: 'JavaApp'
     cliSources: '.'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -30,7 +31,7 @@ steps:
 
 - task: SonarCloudAnalyze@1
   inputs:
-    jdkversion: 'JAVA_HOME_11_X64'
+    jdkversion: 'JAVA_HOME'
 
 - task: PublishBuildArtifacts@1
   inputs:
