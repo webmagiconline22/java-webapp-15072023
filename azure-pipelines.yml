@@ -10,6 +10,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'techish'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'ddc9728c13474fc32447f109e8af6df03e2c8cd2'
+    cliProjectName: 'JavaApp'
+    cliSources: '.'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -18,6 +27,10 @@ steps:
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     goals: 'clean install package'
+
+- task: SonarCloudAnalyze@1
+  inputs:
+    jdkversion: 'JAVA_HOME_11_X64'
 
 - task: PublishBuildArtifacts@1
   inputs:
